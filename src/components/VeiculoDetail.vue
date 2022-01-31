@@ -1,5 +1,5 @@
 <template>
-  <v-card shaped height="350" elevation="4" outlined>
+  <v-card shaped height="350" elevation="4" outlined >
     <v-container>
       <v-row align-content="center" justify="center">
         <v-card-title>

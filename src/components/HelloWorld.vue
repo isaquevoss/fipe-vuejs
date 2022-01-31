@@ -1,5 +1,6 @@
 <template>
   <v-container>
+    <v-form form="form">
     <v-autocomplete :items="referencias" item-text="Mes" @change="getMarcas()" label="Referencias">
     </v-autocomplete>
     <v-autocomplete
@@ -25,11 +26,15 @@
       item-value="Value"
       v-model="yearSelected"
     ></v-autocomplete>
-    <v-btn @click="getReferencias()"> Referencias </v-btn>
+    </v-form>
+    <!-- <v-btn @click="getReferencias()"> Referencias </v-btn>
     <v-btn @click="getMarcas()"> Marcas </v-btn>
     <v-btn @click="getVeiculos()"> Veiculos </v-btn>
-    <v-btn @click="getYears()"> Anos </v-btn>
-    <v-btn @click="getDetails()"> Show </v-btn>
+    <v-btn @click="getYears()"> Anos </v-btn> -->
+    <v-row align="center" justify="center">
+    <v-btn @click="removeDetails()"> Limpar </v-btn>
+    <v-btn @click="getDetails()"> Buscar </v-btn>
+    </v-row>
 
     <v-container>
       <v-row align="center" justify="center">
@@ -50,6 +55,8 @@ export default {
   async mounted() {
     await this.getReferencias();
     await this.getMarcas();
+    if(localStorage.getItem('details') )
+      this.details = JSON.parse( localStorage.getItem('details') );
   },
   data() {
     return {
@@ -61,19 +68,7 @@ export default {
       veicleSelected: {},
       yearSelected: {},
       years: [],
-      details: [{
-        Valor: "R$ 18.698,00",
-        Marca: "Alfa Romeo",
-        Modelo: "145 Elegant 1.7/1.8 16V",
-        AnoModelo: 1999,
-        Combustivel: "Gasolina",
-        CodigoFipe: "006009-7",
-        MesReferencia: "janeiro de 2022 ",
-        Autenticacao: "kdkk9y4m9h",
-        TipoVeiculo: 1,
-        SiglaCombustivel: "G",
-        DataConsulta: "sexta-feira, 28 de janeiro de 2022 19:02",
-      }],
+      details: [],
     };
   },
   methods: {
@@ -96,7 +91,12 @@ export default {
       );
       this.modelos = service.modelos;
     },
+    async removeDetails() {
+      this.details = [];
+      localStorage.removeItem('details');
+    },
     async getDetails() {
+
       this.details.push( await service.loadVeiculo(
         service.referencia.Codigo,
         service.tipos.carro,
@@ -105,6 +105,8 @@ export default {
         this.yearSelected,
         this.yearSelected
       ));
+      localStorage.setItem('details', JSON.stringify(this.details));
+      this.yearSelected = {};
     },
     async getYears() {
       await service.loadAnos(
