@@ -64,8 +64,9 @@ export async function loadAnos(referencia, tipo, marca, modelo) {
 
 export async function loadVeiculo(referencia, tipo, marca, modelo, ano) {
     try {
+        console.log(referencia)
         const [anoModelo, codigoTipoCombustivel] = ano.split("-");
-        console.log({referencia,tipo,marca,modelo,ano,anoModelo,codigoTipoCombustivel})
+        const params = {referencia,tipo,marca,modelo,ano,anoModelo,codigoTipoCombustivel}
         const form = new FormData();
         form.append("codigoTabelaReferencia", parseInt(referencia, 10));
         form.append("codigoTipoVeiculo", parseInt(tipo, 10));
@@ -74,8 +75,7 @@ export async function loadVeiculo(referencia, tipo, marca, modelo, ano) {
         form.append("ano", ano);
         form.append("anoModelo", parseInt(anoModelo, 10));
         form.append("codigoTipoCombustivel", parseInt(codigoTipoCombustivel, 10));
-        form.append("tipoConsulta", "tradicional");
-        console.log(form.toString())
+        form.append("tipoConsulta", "tradicional");        
 
         const { data } = await axios.post(
             `${fipeAPI}/ConsultarValorComTodosParametros`,
@@ -83,6 +83,7 @@ export async function loadVeiculo(referencia, tipo, marca, modelo, ano) {
         );
         console.log(data);
         veiculo = data;
+        veiculo.params = params;
 
         return veiculo;
     } catch (err) {
@@ -92,9 +93,6 @@ export async function loadVeiculo(referencia, tipo, marca, modelo, ano) {
 
 export async function loadModelos(_referencia, _tipoVeiculo, _marca) {
     try {
-        console.log(_referencia);
-        console.log(_tipoVeiculo);
-        console.log(_marca);
         const form = new FormData();
         form.append("codigoTabelaReferencia", parseInt(_referencia, 10));
         form.append("codigoTipoVeiculo", parseInt(_tipoVeiculo, 10));
