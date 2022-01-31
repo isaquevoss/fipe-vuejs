@@ -98,13 +98,19 @@ export default {
     async refreshDetails() {
       for (let i = 0; i < this.details.length; i++) {
         var item = this.details[i];
-        setTimeout( async () =>{ Object.assign(this.details[i],  await service.loadVeiculo(
-          item.params.referencia,
-          item.params.tipo,
-          item.params.marca,
-          item.params.modelo,
-          item.params.ano 
-        ));}, 500);
+        if (item.params)
+          setTimeout(async () => {
+            Object.assign(
+              this.details[i],
+              await service.loadVeiculo(
+                item.params.referencia,
+                item.params.tipo,
+                item.params.marca,
+                item.params.modelo,
+                item.params.ano
+              )
+            );
+          }, 500);
       }
     },
     async getMarcas() {
