@@ -20,7 +20,7 @@
                 item-text="Label"
                 item-value="Value"
                 clearable
-                @change="getVeiculos()"
+                @change="marcasChange()"
                 v-model="marcaSelected"
               ></v-autocomplete>
               <v-autocomplete
@@ -136,6 +136,10 @@ export default {
       if (res.Anos) this.years = res.Anos;
 
       this.veicleSelected = String(currentModel);
+    },
+    async marcasChange() {
+      this.yearSelected = null;
+      this.getVeiculos();
     },
     async removeDetails() {
       this.details = [];
