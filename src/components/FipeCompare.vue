@@ -146,16 +146,16 @@ export default {
       localStorage.removeItem("details");
     },
     async getDetails() {
-      this.details.push(
-        await service.loadVeiculo(
-          this.referenciaSelected,
-          service.tipos.carro,
-          this.marcaSelected,
-          this.veicleSelected,
-          this.yearSelected,
-          this.yearSelected
-        )
+      const veicle = await service.loadVeiculo(
+        this.referenciaSelected,
+        service.tipos.carro,
+        this.marcaSelected,
+        this.veicleSelected,
+        this.yearSelected,
+        this.yearSelected
       );
+      console.log(veicle)
+      if (veicle) this.details.push(veicle);
       localStorage.setItem("details", JSON.stringify(this.details));
       this.yearSelected = {};
     },
