@@ -1,17 +1,24 @@
 <template>
   <div>
-    <HelloWorld />
+    <FipeCompare />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import FipeCompare from '@/components/FipeCompare.vue'
 
 export default {
   name: 'Home',
   components: {
-    HelloWorld
-  }
+    FipeCompare
+  },
+  metaInfo: {
+    htmlAttrs: {
+      lang: 'pt-BR',
+    },
+    title: 'About',
+    meta: [{ name: 'Tabela fipe', content: 'Compare os preços da tabela fipe' }],
+  },
 }
 </script>

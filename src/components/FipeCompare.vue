@@ -75,7 +75,7 @@ import * as service from "../service";
 import VeiculoDetail from "./VeiculoDetail.vue";
 export default {
   components: { VeiculoDetail },
-  name: "HelloWorld",
+  name: "FipeCompare",
   async mounted() {
     await this.getReferencias();
     await this.getMarcas();
