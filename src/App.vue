@@ -18,7 +18,8 @@
     </v-app>
   </div>
 </template>
-
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1565680081169870"
+     crossorigin="anonymous"></script>
 <style lang="scss">
 
 .v-app-bar-title__content{
