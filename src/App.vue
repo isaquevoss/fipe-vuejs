@@ -1,30 +1,43 @@
 <template>
-  <v-app>
-    <v-app-bar app color="primary" dark> 
-      <v-app-bar-title>Compara fipe</v-app-bar-title>
-    </v-app-bar>
-      
-    <v-main>
-      <HelloWorld />    
-    </v-main>
-    <v-footer>
-      Desenvolvido por  <v-btn icon target="_blank" tag="i" href="https://github.com/isaquevoss" size="24px" ><v-icon>mdi-github</v-icon> </v-btn> isaquevoss
-    </v-footer>
-  </v-app>
+  <div id="app" data-server-rendered="true">
+    <v-app id="app">
+      <v-app-bar app color="primary" dark>
+        <v-app-bar-title class="text-no-wrap">Compara fipe</v-app-bar-title>
+      </v-app-bar>
+
+      <v-main>
+        <router-view />
+      </v-main>
+      <v-footer>
+        Desenvolvido por
+        <v-btn icon target="_blank" tag="i" href="https://github.com/isaquevoss" size="24px"
+          ><v-icon>mdi-github</v-icon>
+        </v-btn>
+        isaquevoss
+      </v-footer>
+    </v-app>
+  </div>
 </template>
 
-<script>
-import HelloWorld from "./components/HelloWorld";
+<style lang="scss">
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  
+  color: #2c3e50;
+}
 
-export default {
-  name: "App",
+#nav {
+  padding: 30px;
 
-  components: {
-    HelloWorld,
-  },
+  a {
+    font-weight: bold;
+    color: #2c3e50;
 
-  data: () => ({
-    //
-  }),
-};
-</script>
+    &.router-link-exact-active {
+      color: #42b983;
+    }
+  }
+}
+</style>
