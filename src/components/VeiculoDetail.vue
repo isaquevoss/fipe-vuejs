@@ -11,26 +11,29 @@
         <v-list-item-group color="primary">
           <v-list-item>
             <v-list-item-icon>
-              <v-icon>mdi-clock</v-icon>
+              <v-icon>mdi-star</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-title v-text="`Ano: ${detail.AnoModelo} ${detail.Combustivel}`"></v-list-item-title>
+              <v-list-item-title
+                class="text-wrap"
+                v-text="`Ano: ${detail.AnoModelo} ${detail.Combustivel}`"
+              ></v-list-item-title>
             </v-list-item-content>
           </v-list-item>
           <v-list-item>
             <v-list-item-icon>
-              <v-icon>mdi-clock</v-icon>
+              <v-icon>mdi-star</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-title v-text="`Código Fipe: ${detail.CodigoFipe}`"></v-list-item-title>
+              <v-list-item-title class="text-wrap" v-text="`Código Fipe: ${detail.CodigoFipe}`"></v-list-item-title>
             </v-list-item-content>
           </v-list-item>
           <v-list-item>
             <v-list-item-icon>
-              <v-icon>mdi-clock</v-icon>
+              <v-icon>mdi-star</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-title v-text="`Referência: ${detail.MesReferencia}`"></v-list-item-title>
+              <v-list-item-title class="text-wrap" v-text="`Referência: ${detail.MesReferencia}`"></v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-list-item-group>

@@ -62,7 +62,7 @@
 
     <v-container>
       <v-row align="center" justify="center">
-        <v-col v-for="(detail, i) in details" :key="i" cols="12" md="5">
+        <v-col v-for="(detail, i) in details" :key="i" cols="12" md="4">
           <veiculo-detail :detail="detail" />
         </v-col>
       </v-row>
@@ -124,7 +124,6 @@ export default {
       this.marcas = service.marcas;
     },
     async getVeiculos() {
-      
       const currentModel = this.veicleSelected;
       const res = await service.loadModelos(
         service.referencia.Codigo,
@@ -132,12 +131,11 @@ export default {
         this.marcaSelected,
         this.yearSelected
       );
-      
+
       this.modelos = res.Modelos;
       if (res.Anos) this.years = res.Anos;
 
       this.veicleSelected = String(currentModel);
-      
     },
     async removeDetails() {
       this.details = [];
@@ -158,7 +156,6 @@ export default {
       this.yearSelected = {};
     },
     async getYears() {
-      
       const anos = await service.loadAnos(
         this.referenciaSelected,
         service.tipos.carro,
