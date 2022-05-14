@@ -20,6 +20,11 @@
 </template>
 
 <style lang="scss">
+
+.v-app-bar-title__content{
+  width: 200px !important;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
