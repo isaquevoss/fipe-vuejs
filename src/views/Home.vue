@@ -17,7 +17,7 @@ export default {
     htmlAttrs: {
       lang: 'pt-BR',
     },
-    title: 'About',
+    title: 'Comparar Preços',
     meta: [{ name: 'Tabela fipe', content: 'Compare os preços da tabela fipe' }],
   },
 }
