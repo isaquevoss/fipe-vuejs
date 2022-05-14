@@ -19,6 +19,7 @@
                 label="Marcas"
                 item-text="Label"
                 item-value="Value"
+                clearable
                 @change="getVeiculos()"
                 v-model="marcaSelected"
               ></v-autocomplete>
@@ -27,15 +28,17 @@
                 label="Modelos"
                 item-value="Value"
                 item-text="Label"
+                clearable
                 @change="getYears()"
                 v-model="veicleSelected"
               ></v-autocomplete>
               <v-autocomplete
                 :items="years"
+                clearable
                 label="Anos"
                 item-text="Label"
-                item-value="Value"         
-                @change="getVeiculos()"       
+                item-value="Value"
+                @change="getVeiculos()"
                 v-model="yearSelected"
               ></v-autocomplete>
             </v-form>
@@ -59,7 +62,7 @@
 
     <v-container>
       <v-row align="center" justify="center">
-        <v-col v-for="(detail, i) in details" :key="i" cols="12" md="6" lg="4" xl="3">
+        <v-col v-for="(detail, i) in details" :key="i" cols="12" md="5">
           <veiculo-detail :detail="detail" />
         </v-col>
       </v-row>
@@ -77,8 +80,6 @@ export default {
     await this.getReferencias();
     await this.getMarcas();
     if (localStorage.getItem("details")) this.details = JSON.parse(localStorage.getItem("details"));
-
-    this.refreshDetails();
   },
   data() {
     return {
@@ -99,7 +100,6 @@ export default {
       await service.loadReferencias();
       this.referencias = service.referencias;
       this.referenciaSelected = this.referencias[0].Codigo;
-      console.log(this.referencias);
     },
     async refreshDetails() {
       for (let i = 0; i < this.details.length; i++) {
@@ -124,13 +124,20 @@ export default {
       this.marcas = service.marcas;
     },
     async getVeiculos() {
-      console.log(this.yearSelected)
-      const res = await service.loadModelos(service.referencia.Codigo, service.tipos.carro, this.marcaSelected, this.yearSelected);
-      this.modelos = res.Modelos;
-      if (res.Anos)
-         this.years = res.Anos;
       
-      console.log(this.anos)
+      const currentModel = this.veicleSelected;
+      const res = await service.loadModelos(
+        service.referencia.Codigo,
+        service.tipos.carro,
+        this.marcaSelected,
+        this.yearSelected
+      );
+      
+      this.modelos = res.Modelos;
+      if (res.Anos) this.years = res.Anos;
+
+      this.veicleSelected = String(currentModel);
+      
     },
     async removeDetails() {
       this.details = [];
@@ -151,8 +158,14 @@ export default {
       this.yearSelected = {};
     },
     async getYears() {
-      await service.loadAnos(this.referenciaSelected, service.tipos.carro, this.marcaSelected, this.veicleSelected);
-      this.years = service.anos;      
+      
+      const anos = await service.loadAnos(
+        this.referenciaSelected,
+        service.tipos.carro,
+        this.marcaSelected,
+        this.veicleSelected
+      );
+      this.years = anos;
     },
   },
   props: {
