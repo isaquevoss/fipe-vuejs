@@ -1,9 +1,13 @@
 <template>
-  <div class="hello">
-    {{ dados }}    
+  <v-container>
+    <v-row>
+      <v-col>
+        <v-btn></v-btn>
+      </v-col>
+    </v-row>
     <button @click="getReferencias()">ref</button>
     <button @click="getMarcas()">Marcas</button>
-  </div>
+  </v-container>
 </template>
 
 <script>
@@ -18,13 +22,13 @@ export default {
   methods: {
     getReferencias() {
       console.log("teste");
-      console.log(service.loadReferencias)
+      console.log(service.loadReferencias);
       service.loadReferencias();
       // this.dados = referencias;
     },
     getMarcas() {
-      service.loadMarcas(service.referencia.Codigo,service.tipos.carro);
-    }
+      service.loadMarcas(service.referencia.Codigo, service.tipos.carro);
+    },
   },
   props: {
     msg: String,
